@@ -8,7 +8,7 @@ const layoutStyle = {
     height:'100%',
     width:'100%'
   };
-const layoutPage=()=>{
+const LayoutPage=()=>{
 
     return<>
     <Layout style={layoutStyle} className={styles.Layoutcot}>
@@ -25,4 +25,4 @@ const layoutPage=()=>{
     </>
 }
 
-export default layoutPage;
+export default LayoutPage;
