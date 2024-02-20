@@ -1,6 +1,7 @@
 import React from "react"
 import { Layout } from "antd";
 import styles from './css/layout.module.css'
+import Routerpages from "../routers";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -8,7 +9,7 @@ const layoutStyle = {
     height:'100%',
     width:'100%'
   };
-const LayoutPage=()=>{
+const App=()=>{
 
     return<>
     <Layout style={layoutStyle} className={styles.Layoutcot}>
@@ -17,7 +18,9 @@ const LayoutPage=()=>{
       <Sider width="15%" height="100%">
           Sider
       </Sider>
-        <Content>Content</Content>
+        <Content>
+            <Routerpages />
+        </Content>
         
       </Layout>
       <Footer className={styles.footcon}>Footer</Footer>
@@ -25,4 +28,4 @@ const LayoutPage=()=>{
     </>
 }
 
-export default LayoutPage;
+export default App;

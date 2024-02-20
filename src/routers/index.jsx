@@ -4,8 +4,8 @@ import { BrowserRouter, useRoutes, createBrowserRouter, RouterProvider} from "re
 import routes from "./routercomponent";
 
 
-const App = () => {
-  const GetRoutes=()=>useRoutes(routes)
+const Routerpages = () => {
+  // const GetRoutes=()=>useRoutes(routes)
   return (
     <>
         <React.Suspense fallback={<div>loading</div>}>
@@ -15,4 +15,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Routerpages;
