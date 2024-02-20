@@ -8,6 +8,7 @@ const Routerpages = () => {
   // const GetRoutes=()=>useRoutes(routes)
   return (
     <>
+        
         <React.Suspense fallback={<div>loading</div>}>
             <RouterProvider router={createBrowserRouter(routes)} />
         </React.Suspense>

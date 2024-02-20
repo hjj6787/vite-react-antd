@@ -19,7 +19,7 @@ const App=()=>{
           Sider
       </Sider>
         <Content>
-            <Routerpages />
+            <Routerpages/>
         </Content>
         
       </Layout>
