@@ -4,7 +4,7 @@ const Linechart=()=>{
 
 
     return <>
-        <h1>linechart2</h1>
+        <h1>linechart1</h1>
     </>
 }
 

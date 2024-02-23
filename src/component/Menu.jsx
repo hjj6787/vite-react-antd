@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   ContainerOutlined,
   DesktopOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
   PieChartOutlined,
 } from '@ant-design/icons';
-import { Button, Menu } from 'antd';
-import { useLocation, getRoutes } from 'react-router-dom';
+import { Menu } from 'antd';
+import routes from '@/routers/routercomponent';
+import DynamicIcon from '../utils/iconimoprt';
+// import {getTreeMenu} from '@/utils/common'
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -18,41 +18,26 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
+// const iconc=DynamicIcon
 const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
+  getItem('Option 1', '1', <DynamicIcon iconName="HomeOutlined"/>),
   getItem('Option 2', '2', <DesktopOutlined />),
   getItem('Option 3', '3', <ContainerOutlined />),
 ];
 const MenuCon = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-  const location=useLocation()
-  console.log(location);
-  const routers=getRoutes()
-  console.log(routers);
+  // const item = getTreeMenu(routes)
+  // console.log(item);
   return (
     <div
       style={{
         width: "100%",
       }}
     >
-      <Button
-        type="primary"
-        onClick={toggleCollapsed}
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </Button>
       <Menu
         defaultSelectedKeys={['1']}
         defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"
-        inlineCollapsed={collapsed}
         items={items}
       />
     </div>

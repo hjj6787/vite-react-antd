@@ -1,7 +1,7 @@
 import React from "react"
 import { Layout } from "antd";
 import styles from './css/layout.module.css'
-import Routerpages from "../routers";
+import Routerpages from "@/routers";
 
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -18,13 +18,9 @@ const App=()=>{
     <Layout style={layoutStyle} className={styles.Layoutcot}>
       <Header>Header</Header>
       <Layout>
-      
-        
-            <Routerpages/>
-       
-        
+          <Routerpages/>
       </Layout>
-      <Footer className={styles.footcon}>Footer</Footer>
+      
     </Layout>
     
     </>
