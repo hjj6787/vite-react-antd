@@ -1,14 +1,12 @@
 import React from "react"
-
-// const LayoutPage=React.lazy(()=>import('../pages/layout'))
-const Linechart1=React.lazy(()=>import('../pages/linechart1/Linechart1'))
-const Linechart2=React.lazy(()=>import('../pages/linechart2/Linechart2'))
-
+import {Navigate} from 'react-router-dom'
+const Layout=React.lazy(()=>import('../pages/layout'))
+const Login=React.lazy(()=>import('../pages/login'))
 
 const routes=[
-    { path: '/', element: <Linechart1 />, auth: false, name: '/' },
-    { path: '/Linechart1', element: <Linechart1 />, auth: false, name: 'LayoutPage1', icon: 'PieChartOutlined' },
-    { path: '/Linechart2', element: <Linechart2 />, auth: false, name: 'LayoutPage2', icon: 'DesktopOutlined'}
+    { path: '/', element: <Navigate  ator  to='/main'/>, auth: false, name: '/' },
+    { path: '/main', element: <Layout />, auth: false, name: 'man', icon: 'PieChartOutlined' },
+    { path: '/login', element: <Login />, auth: false, name: 'login', icon: 'DesktopOutlined'}
 ]
 
 export default routes;

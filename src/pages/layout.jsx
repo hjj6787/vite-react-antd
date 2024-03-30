@@ -1,9 +1,10 @@
 import React from "react"
-import { Layout } from "antd";
+import { Layout ,Button } from "antd";
 import styles from './css/layout.module.css'
-import Routerpages from "@/routers";
-
-
+// import Routerpages from "@/routers";
+import { useState } from "react";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import MenuCon from "../component/Menu"
 const { Header, Footer, Sider, Content } = Layout;
 
 const layoutStyle = {
@@ -11,14 +12,36 @@ const layoutStyle = {
     width:'100%'
   };
 
-const App=()=>{
-    
+const LayoutPage=()=>{
+  const [collapsed, setCollapsed] = useState(false);
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
     return<>
     
     <Layout style={layoutStyle} className={styles.Layoutcot}>
       <Header>Header</Header>
       <Layout>
-          <Routerpages/>
+      <Sider
+          width="15%"
+          height="100%"
+          collapsed={collapsed}
+          onCollapse={toggleCollapsed}
+        >
+          <Button
+            type="primary"
+            onClick={toggleCollapsed}
+            style={{
+              marginBottom: 16,
+            }}
+          >
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </Button>
+          <MenuCon />
+        </Sider>
+        <Content className={styles.Contentp}>
+          
+        </Content>
       </Layout>
       
     </Layout>
@@ -26,4 +49,4 @@ const App=()=>{
     </>
 }
 
-export default App;
+export default LayoutPage;

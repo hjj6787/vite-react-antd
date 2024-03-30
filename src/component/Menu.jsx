@@ -1,44 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ContainerOutlined,
   DesktopOutlined,
   PieChartOutlined,
 } from '@ant-design/icons';
+import * as Icons from '@ant-design/icons'
 import { Menu } from 'antd';
-import routes from '@/routers/routercomponent';
-import DynamicIcon from '../utils/iconimoprt';
-// import {getTreeMenu} from '@/utils/common'
+import request from '../utils/request';
+import styles from './Menu.module.css'
+// 请求模拟数据
+const iconList = Icons
+function addIconToMenu(menuData) {
+  for (let i = 0; i < menuData.length; i++) {
+    if (menuData[i].ps_icon) {
+      menuData[i].icon = React.createElement(iconList[menuData[i].ps_icon])
+    }
 
-function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
+    if (menuData[i].children) {
+      menuData[i].children = addIconToMenu(menuData[i].children)
+    }
+  }
+
+  return menuData
 }
-// const iconc=DynamicIcon
-const items = [
-  getItem('Option 1', '1', <DynamicIcon iconName="HomeOutlined"/>),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('Option 3', '3', <ContainerOutlined />),
-];
 const MenuCon = () => {
-  // const item = getTreeMenu(routes)
-  // console.log(item);
+
+ const [menu,setmemu]=useState([])
+  useEffect(()=>{
+    request.get('/api/user').then((res) => {
+      setmemu(addIconToMenu(JSON.parse(JSON.stringify(res.data.data.menus))))
+    }).catch((error) => {
+      console.error("请求出错：", error);
+    });
+  },[])
   return (
     <div
       style={{
         width: "100%",
+       
       }}
+      className={styles.memucon}
     >
       <Menu
-        defaultSelectedKeys={['1']}
-        defaultOpenKeys={['sub1']}
+        defaultSelectedKeys={['101']}
         mode="inline"
         theme="dark"
-        items={items}
+        items={menu}
+        className={styles.menu}
       />
     </div>
   );
