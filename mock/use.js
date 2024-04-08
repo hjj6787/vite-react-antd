@@ -48,7 +48,7 @@ export default [
                     "key":103,
                     "label":'op3',
                     "ps_icon":'CompassOutlined',
-                    "ps_c":'linechart2',
+                    "ps_c":'linechart3',
                     'ps_a':'',
                     'ps_level':'0',
                     "children":[
@@ -58,7 +58,7 @@ export default [
                             "ps_icon":'ContactsOutlined',
                             "ps_c":'linechart3',
                             'ps_a':'index',
-                            'ps_level':'0',
+                            'ps_level':'1',
                         }
                     ]
                 }

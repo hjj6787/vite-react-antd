@@ -1,23 +1,26 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import Routerpages from './routers'
-import './App.css'
-import { BrowserRouter} from "react-router-dom";
-import request from './utils/request';
-import { addRouteToMenu } from './utils/addroutertomenu';
-const App=()=>{
-  request.get('/api/user').then((res) => {
-    setmemu(addRouteToMenu(JSON.parse(JSON.stringify(res.data.data.menus))))
-  }).catch((error) => {
-    console.error("请求出错：", error);
-  });
-  return<>
-    <Routerpages/>
-  </>
-}
+import React from "react";
+import ReactDOM from "react-dom/client";
+import Routerpages from "./routers";
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import { Provider} from "react-redux";
+import store from "./store";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const App = () => {
+  
+  return (
+    <>
+      <Routerpages />
+    </>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter><App /></BrowserRouter>
-  </React.StrictMode>,
-)
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);
