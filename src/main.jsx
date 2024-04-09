@@ -3,15 +3,12 @@ import ReactDOM from "react-dom/client";
 import Routerpages from "./routers";
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
-import { Provider} from "react-redux";
+import { Provider } from "react-redux";
 import store from "./store";
-const App = () => {
-  return (
-    <>
-      <Routerpages />
-    </>
-  );
-};
+
+function App() {
+  return <Routerpages />;
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -20,5 +17,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <App />
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

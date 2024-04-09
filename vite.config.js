@@ -1,18 +1,17 @@
-import { defineConfig } from 'vite'
-import path from "path"
-import react from '@vitejs/plugin-react'
-import dynamicImportVars from '@rollup/plugin-dynamic-import-vars';
-import { viteMockServe } from 'vite-plugin-mock';
+import { defineConfig } from "vite";
+import path from "path";
+import react from "@vitejs/plugin-react";
+// import dynamicImportVars from "@rollup/plugin-dynamic-import-vars";
+import { viteMockServe } from "vite-plugin-mock";
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
     },
-    
   },
   plugins: [
-    react(), 
+    react(),
     // dynamicImportVars({
     //   //这里配置插件在那个文件夹内生效 这里是在router文件夹内生效
     //  include:["node_modules"],
@@ -22,9 +21,8 @@ export default defineConfig({
     //  warnOnError:false
     // }),
     viteMockServe({
-      mockPath:'mock',
+      mockPath: "mock",
       localEnabled: true,
-    })
-
-    ],
-})
+    }),
+  ],
+});

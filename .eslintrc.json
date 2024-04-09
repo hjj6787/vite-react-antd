@@ -1,0 +1,27 @@
+{
+  "ignorePatterns": ["node_modules", "dist"],
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended" // 添加这一行
+  ],
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "plugins": [
+    "prettier" // 添加这一行
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "rules": {
+    // 在这里可以自定义一些规则，根据你的项目需求进行调整
+    "prettier/prettier": "error", // 添加这一行，让不符合 Prettier 的代码显示为错误
+    "import/no-extraneous-dependencies": "off"
+  }
+}
