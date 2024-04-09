@@ -28,7 +28,6 @@ const Routerpages = () => {
   return (
           <React.Suspense fallback={<div>loading</div>}>
             <AuthRoute><GetRoutes /></AuthRoute>
-            
           </React.Suspense>
   );
 };
