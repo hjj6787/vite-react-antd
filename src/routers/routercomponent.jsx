@@ -5,8 +5,12 @@ const Login=React.lazy(()=>import('../pages/login'))
 
 const routes=[
     { path: '/', element: <Navigate  ator  to='/main'/>, auth: false, name: '/' },
-    { path: '/main', element: <Layout />, auth: false, name: 'man', icon: 'PieChartOutlined' },
+    { path: '/main/*', element: <Layout />, auth: false, name: 'man', icon: 'PieChartOutlined',
+    children: [{ path: '', element: <></> }]
+},
     { path: '/login', element: <Login />, auth: false, name: 'login', icon: 'DesktopOutlined'}
 ]
+
+
 
 export default routes;
