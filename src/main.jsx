@@ -7,7 +7,7 @@ import request from './utils/request';
 import { addRouteToMenu } from './utils/addroutertomenu';
 const App=()=>{
   request.get('/api/user').then((res) => {
-    setmemu(addRouteToMenu(JSON.parse(JSON.stringify(res.data.data.menus))))
+    addRouteToMenu(JSON.parse(JSON.stringify(res.data.data.menus)))
   }).catch((error) => {
     console.error("请求出错：", error);
   });

@@ -1,3 +1,5 @@
+
+import LazyLoad from './Lazycom'
 export function addRouteToMenu(menuData) {
     let temp = []
     menuData.forEach((menu) => {
