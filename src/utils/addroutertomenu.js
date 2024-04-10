@@ -4,8 +4,8 @@ export default function addRouteToMenu(menuData) {
   let temp = [];
   menuData.forEach((menu) => {
     if (menu.ps_level !== "0") {
-      const path = `${menu.ps_c}/${menu.ps_a}`;
-      const elementPath = `${menu.ps_c}/${menu.ps_a}`;
+      const path = `${menu.ps_c}`;
+      const elementPath = `${menu.ps_a}`;
       const obj = {
         path,
         element: LazyLoad(elementPath),
@@ -17,5 +17,6 @@ export default function addRouteToMenu(menuData) {
       temp = temp.concat(result);
     }
   });
+  console.log(temp);
   return temp;
 }

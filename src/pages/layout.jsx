@@ -8,10 +8,8 @@ import MenuCon from "../component/Menu";
 import styles from "./css/layout.module.css";
 
 const { Header, Footer, Sider, Content } = Layout;
-
-const layoutStyle = {
-  height: "100%",
-  width: "100%",
+const siderstyle = {
+  flex: "0 0 300px",
 };
 
 function LayoutPage() {
@@ -20,12 +18,11 @@ function LayoutPage() {
     setCollapsed(!collapsed);
   };
   return (
-    <Layout style={layoutStyle} className={styles.Layoutcot}>
+    <Layout className={styles.Layoutcot}>
       <Header>Header</Header>
       <Layout>
         <Sider
-          width="15%"
-          height="100%"
+          className={styles.sidestyle}
           collapsed={collapsed}
           onCollapse={toggleCollapsed}
         >
