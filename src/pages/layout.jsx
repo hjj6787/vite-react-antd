@@ -1,19 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Button } from "antd";
-// import Routerpages from "@/routers";
-import { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import MenuCon from "../component/Menu";
 import styles from "./css/layout.module.css";
 
-const { Header, Footer, Sider, Content } = Layout;
-const siderstyle = {
-  flex: "0 0 300px",
-};
+const { Header, Sider, Content } = Layout;
+// Footer,
 
 function LayoutPage() {
   const [collapsed, setCollapsed] = useState(false);
+  const path = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    // console.log(path);
+    if (path.pathname === "/main") {
+      navigate("/main/dashboard");
+    }
+  }, []);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };

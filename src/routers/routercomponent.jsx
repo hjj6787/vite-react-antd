@@ -7,13 +7,20 @@ const Pages404 = React.lazy(() => import("../pages/404page"));
 
 const routes = [
   { path: "/", element: <Navigate to="/main" />, auth: false, name: "/" },
+  // {
+  //   path: "/main",
+  //   element: <Navigate to="/main/dashboard" />,
+  //   auth: false,
+  //   name: "main",
+  //   icon: "PieChartOutlined",
+  // },
   {
     path: "/main/*",
     element: <Layout />,
     auth: false,
     name: "man",
     icon: "PieChartOutlined",
-    children: [{ path: "", element: <></> }],
+    children: [],
   },
   {
     path: "/login",

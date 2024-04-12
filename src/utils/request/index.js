@@ -1,8 +1,9 @@
 // src/axios.js
 import axios from "axios";
 
+const apiBaseUrl = import.meta.env.VITE_API_URL;
 const request = axios.create({
-  baseURL: "/", // 假设你的开发服务器是运行在 localhost:3000
+  baseURL: apiBaseUrl,
   timeout: 1000,
 });
 

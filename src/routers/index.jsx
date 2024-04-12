@@ -11,11 +11,11 @@ function Routerpages() {
   const dispatch = useDispatch();
   useEffect(() => {
     request
-      .get("/api/user")
+      .get("/user")
       .then((res) => {
-        const data = JSON.parse(JSON.stringify(res.data.data.menus));
+        const data = JSON.parse(JSON.stringify(res.data.menus));
         dispatch(adduserrouter(data));
-        console.log(data);
+        // console.log(data);
         const datacom = addRouteToMenu(data);
         // console.log(datacom);
         routes[1].children = [...datacom];

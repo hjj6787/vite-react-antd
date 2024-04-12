@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { produce } from "immer";
 
 export const userSclice = createSlice({
   name: "user",
@@ -9,7 +10,9 @@ export const userSclice = createSlice({
   },
   reducers: {
     adduserrouter(state, action) {
-      state.commom.route = [...action.payload];
+      return produce(state, (draft) => {
+        draft.commom.route = [...action.payload];
+      });
     },
   },
 });

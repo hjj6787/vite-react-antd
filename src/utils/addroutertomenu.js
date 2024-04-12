@@ -10,6 +10,9 @@ export default function addRouteToMenu(menuData) {
         path,
         element: LazyLoad(elementPath),
       };
+      // if (menu.index) {
+      //   obj.index = "true";
+      // }
       temp.push(obj);
     }
     if (menu.children) {
@@ -17,6 +20,6 @@ export default function addRouteToMenu(menuData) {
       temp = temp.concat(result);
     }
   });
-  console.log(temp);
+  // console.log(temp);
   return temp;
 }

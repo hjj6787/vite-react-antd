@@ -158,3 +158,79 @@ function counterReducer(state = { count: 0 }, action) {
 }
 
 ```
+
+## redux持久化
+
+redux index.js配置
+
+```apache
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
+import userReducer from './features/userSlice';
+// 其他 reducers...
+
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+  whitelist: ['user'] // 指定只持久化 user reducer
+};
+
+const rootReducer = combineReducers({
+  user: userReducer,
+  // 其他 reducers...
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+export const persistor = persistStore(store);
+
+
+```
+
+mian.jsx
+
+```apache
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store';
+import App from './App';
+
+ReactDOM.render(
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
+  </Provider>,
+  document.getElementById('root')
+);
+
+```
+
+## 浏览器插件redux与react devtool
+
+redux devtool,但是@reduxjs/toolkit已经集成
+
+```
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './reducers';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers(
+  applyMiddleware(...middleware),
+));
+
+```

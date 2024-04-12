@@ -1,3 +1,5 @@
+import React from "react";
+
 function Page404() {
   return <>pages404</>;
 }

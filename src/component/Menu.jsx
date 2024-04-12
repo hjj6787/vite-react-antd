@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  ContainerOutlined,
-  DesktopOutlined,
-  PieChartOutlined,
-} from "@ant-design/icons";
 import * as Icons from "@ant-design/icons";
 import { Menu } from "antd";
-import request from "../utils/request";
-import styles from "./Menu.module.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import styles from "./Menu.module.css";
 // 请求模拟数据
 const iconList = Icons;
 function addIconToMenu(menuData) {
@@ -27,20 +21,22 @@ function addIconToMenu(menuData) {
 }
 
 function findPsAByKey(arr, key) {
-  let result = null;
-
-  for (const item of arr) {
+  // 使用 find 方法来尝试找到直接满足条件的元素
+  const foundItem = arr.find((item) => {
+    // 检查当前元素的键是否匹配
     if (item.key === key) {
-      return item.ps_c; // 如果找到匹配的键，返回 ps_a 的值
+      return true;
     }
-
+    // 否则，如果存在子数组，递归查找子数组
     if (item.children) {
-      result = findPsAByKey(item.children, key); // 递归搜索子数组
-      if (result) break; // 如果在子数组中找到结果，结束循环
+      return findPsAByKey(item.children, key);
     }
-  }
+    // 当前元素不匹配，且无子数组，返回 false 继续搜索
+    return false;
+  });
 
-  return result; // 返回找到的 ps_a 的值，或者如果没有找到则返回 null
+  // 如果找到了匹配的元素，返回其 ps_c 属性，否则返回 null
+  return foundItem ? foundItem.ps_c : null;
 }
 
 function MenuCon() {
