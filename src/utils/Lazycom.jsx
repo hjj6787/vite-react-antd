@@ -4,7 +4,6 @@
 import React, { Suspense } from "react";
 import loadable from "@loadable/component";
 
-const loadables = loadable;
 const modules = import.meta.glob("@/pages/*/*.jsx");
 
 function LazyLoad(url) {
@@ -17,7 +16,7 @@ function LazyLoad(url) {
     console.log(modulePath);
     return null;
   }
-  const LoadableComponent = loadables(() => modules[modulePath]());
+  const LoadableComponent = loadable(() => modules[modulePath]());
   return (
     <Suspense>
       <LoadableComponent />
