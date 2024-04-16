@@ -14,6 +14,7 @@ Currently, two official plugins are available:
 - │
   ├── dashboard
   │ └── index.jsx # 仪表盘主页面
+  
   │
   ├── inventory
   │ ├── index.jsx # 库存列表页面
@@ -27,6 +28,7 @@ Currently, two official plugins are available:
   │ ├── sales-report.jsx # 销售报表页面
   │ ├── inventory-report.jsx# 库存报表页面
   │ └── financial-report.jsx# 财务报表页面
+  
   │
   └── settings
   ├── index.jsx # 系统设置主页面
