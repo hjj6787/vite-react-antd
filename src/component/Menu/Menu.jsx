@@ -22,7 +22,8 @@ function findPsAByKey(arr, key) {
   for (const item of arr) {
     if (item.key == key) {
       return item.ps_c;
-    } else if (item.children) {
+    }
+    if (item.children) {
       return findPsAByKey(item.children, key);
     }
   }
