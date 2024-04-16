@@ -5,12 +5,26 @@
 
 }
 
+.HeadStyle {}
+
+.HeadSpanStyle {
+    float: left;
+    height: 100%;
+    /* padding-top: 10%; */
+    line-height: 100%;
+}
+
+.HeadSpanStyle img {
+    margin-top: 35%;
+}
+
 .footcon {
     background-color: bisque;
 }
 
 .Contentp {
     color: rgb(23, 26, 29);
+    padding: 20px;
 }
 
 .layoutStyle {}
@@ -20,5 +34,5 @@
     /* max-width: 300px !important; */
     /* flex: 0 0 250px !important; */
     height: 100%;
-
+    background-color: #ffffff;
 }

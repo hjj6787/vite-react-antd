@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Layout, Button } from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import MenuCon from "../component/Menu";
+import MenuCon from "../component/Menu/Menu";
 import styles from "./css/layout.module.css";
 
 const { Header, Sider, Content } = Layout;
@@ -22,13 +22,23 @@ function LayoutPage() {
     setCollapsed(!collapsed);
   };
   return (
-    <Layout className={styles.Layoutcot}>
-      <Header>Header</Header>
+    <Layout className={styles.Layoutcot} style={{ backgroundColor: "#ffffff" }}>
+      <Header style={{ backgroundColor: "#ffffff", marginBottom: "15px" }}>
+        <span className={styles.HeadSpanStyle}>
+          <img
+            src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+            alt=""
+            style={{ height: "50%" }}
+          />
+        </span>
+        <h1>Vite+React+antd5</h1>
+      </Header>
       <Layout>
         <Sider
           className={styles.sidestyle}
           collapsed={collapsed}
           onCollapse={toggleCollapsed}
+          style={{ backgroundColor: "#ffffff" }}
         >
           <Button
             type="primary"
