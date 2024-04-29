@@ -49,17 +49,11 @@ Api.interceptors.response.use(
   }
 );
 
-export const Getuser = async (username, password) => {
-  console.log(username, password);
+export const Getuser = async (data) => {
   try {
-    const response = await Api.get(`user/login`, {
-      params: {
-        username: username,
-        password: password,
-      },
-    });
+    const response = await Api.post(`user/Tlogin`, data);
     // console.log(response.data);
-    localStorage.setItem("token", response.data.access_token);
+    localStorage.setItem("token", response.data.token);
     return response;
   } catch (error) {
     console.error("Failed to fetch resource:", error);
@@ -69,6 +63,14 @@ export const Getuser = async (username, password) => {
 export const Getuserlist = async () => {
   try {
     const response = await Api.get(`user/userlist`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+export const Loginbody = async (postdata, params) => {
+  try {
+    const response = await Api.post(`user/loginbody`, postdata);
     return response;
   } catch (error) {
     throw error;

@@ -1,18 +1,33 @@
 import React from "react";
 import { Button, Checkbox, Form, Input } from "antd";
-import { Getuser, Getuserlist } from "../../utils/request/api";
+import { Getuser, Getuserlist, Loginbody } from "../../utils/request/api";
 
 const onFinish = async (values) => {
   console.log("Success:", values);
-  const userdata = await Getuser(values.username, values.password);
+  const userdata = await Getuser({
+    username: values.username,
+    password: values.password,
+  });
   console.log(userdata);
 };
 const onFinishFailed = (errorInfo) => {
   console.log("Failed:", errorInfo);
 };
-const GetuserList = () => {
-  const list = Getuserlist();
-  console.log(list);
+const GetuserList = async () => {
+  const postData = {
+    key1: "value1",
+    key2: "value2",
+  };
+
+  // 设置 URL 参数
+  const params = {
+    param1: "value1",
+    param2: "value2",
+  };
+  // const list = Getuserlist();
+
+  const body = await Loginbody(postData, params);
+  console.log(body);
 };
 function InventoryAudit() {
   return (
