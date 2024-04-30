@@ -3,6 +3,8 @@ import { Navigate } from "react-router-dom";
 
 const Layout = React.lazy(() => import("../pages/layout"));
 const Login = React.lazy(() => import("../pages/login"));
+const Dashboard = React.lazy(() => import("../pages/dashboard"));
+const Admin = React.lazy(() => import("../pages/admin"));
 const Pages404 = React.lazy(() => import("../pages/404page"));
 
 const routes = [
@@ -18,9 +20,26 @@ const routes = [
     path: "/main/*",
     element: <Layout />,
     auth: false,
-    name: "man",
+    name: "main",
     icon: "PieChartOutlined",
-    children: [],
+    children: [
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+        auth: false,
+        name: "man",
+        icon: "PieChartOutlined",
+        children: [],
+      },
+      {
+        path: "admin",
+        element: <Admin />,
+        auth: false,
+        name: "man",
+        icon: "PieChartOutlined",
+        children: [],
+      },
+    ],
   },
   {
     path: "/login",

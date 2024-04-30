@@ -52,6 +52,7 @@ function MenuCon() {
         defaultSelectedKeys={["101"]}
         mode="inline"
         theme="dark"
+        style={{ backgroundColor: "#212323" }}
         items={menu}
         className={styles.menu}
         onClick={(e) => Menuclick(e)}

@@ -23,7 +23,7 @@ function LayoutPage() {
   };
   return (
     <Layout className={styles.Layoutcot} style={{ backgroundColor: "#ffffff" }}>
-      <Header style={{ backgroundColor: "#ffffff", marginBottom: "15px" }}>
+      <Header style={{ backgroundColor: "#0046a1" }}>
         <span className={styles.HeadSpanStyle}>
           <img
             src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
@@ -38,7 +38,7 @@ function LayoutPage() {
           className={styles.sidestyle}
           collapsed={collapsed}
           onCollapse={toggleCollapsed}
-          style={{ backgroundColor: "#ffffff" }}
+          style={{ backgroundColor: "#212323", paddingTop: "15px" }}
         >
           <Button
             type="primary"
