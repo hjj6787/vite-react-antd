@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StockOutlined, PieChartOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styles from "./Menu.module.css";
 // 请求模拟数据
@@ -18,29 +17,48 @@ function addIconToMenu(menuData) {
   return menuData;
 }
 
-function findPsAByKey(arr, key) {
-  for (const item of arr) {
-    if (item.key == key) {
-      return item.ps_c;
-    }
-    if (item.children) {
-      return findPsAByKey(item.children, key);
-    }
-  }
+// function findPsAByKey(arr, key) {
+//   for (const item of arr) {
+//     if (item.key == key) {
+//       return item.ps_c;
+//     }
+//     if (item.children) {
+//       return findPsAByKey(item.children, key);
+//     }
+//   }
+// }
+function menudata() {
+  return [
+    {
+      key: 101,
+      label: "dashboard",
+      icon: <PieChartOutlined />,
+      path: "dashboard",
+    },
+    {
+      key: 102,
+      label: "media",
+      icon: <PieChartOutlined />,
+      path: "media",
+    },
+    {
+      key: 103,
+      label: "admin",
+      icon: <PieChartOutlined />,
+      path: "admin",
+    },
+  ];
 }
 
 function MenuCon() {
-  const [menu, setmemu] = useState([]);
-  const menudata = useSelector((state) => state.user.commom.route);
-  // console.log(menudata);
   const Navigate = useNavigate();
-  useEffect(() => {
-    setmemu(addIconToMenu(JSON.parse(JSON.stringify(menudata))));
-  }, [menudata]);
+  useEffect(() => {}, []);
+  console.log();
   const Menuclick = (e) => {
-    const path = findPsAByKey(menudata, e.key * 1);
+    const path = menudata().find((item) => item.key == e.key).path;
     Navigate(path);
   };
+
   return (
     <div
       style={{
@@ -53,7 +71,7 @@ function MenuCon() {
         mode="inline"
         theme="dark"
         style={{ backgroundColor: "#212323" }}
-        items={menu}
+        items={menudata()}
         className={styles.menu}
         onClick={(e) => Menuclick(e)}
       />

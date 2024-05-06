@@ -77,4 +77,17 @@ export const Loginbody = async (postdata, params) => {
   }
 };
 
+export const Uploadfiles = async (postdata, params) => {
+  try {
+    const response = await Api.post(`upload/files`, postdata, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(postdata);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
 export default Api;
