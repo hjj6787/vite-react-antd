@@ -18,6 +18,14 @@ const routes = [
     icon: "PieChartOutlined",
     children: [
       {
+        path: "",
+        element: <Navigate to="dashboard" />,
+        auth: false,
+        name: "default",
+        icon: "PieChartOutlined",
+        children: [],
+      },
+      {
         path: "dashboard",
         element: <Dashboard />,
         auth: false,

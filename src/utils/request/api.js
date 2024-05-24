@@ -1,53 +1,6 @@
-import axios from "axios";
-
-// 创建 Axios 实例
-const Api = axios.create({
-  baseURL: "http://localhost:3000/", // 你的 API 基础 URL
-  timeout: 10000, // 请求超时时间
-  headers: {
-    "Content-Type": "application/json", // 设置默认请求头
-    Accept: "application/json",
-  },
-});
-
-// 请求拦截器
-Api.interceptors.request.use(
-  (config) => {
-    // 这里可以在发送请求之前对配置做一些处理
-    // 例如，添加 Authorization header
-    const token = localStorage.getItem("token"); // 假设 token 存储在 localStorage
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    // 处理请求错误
-    return Promise.reject(error);
-  }
-);
-
-// 响应拦截器
-Api.interceptors.response.use(
-  (response) => {
-    // 对响应数据做点什么
-    return response.data;
-  },
-  (error) => {
-    // 处理响应错误
-    if (error.response) {
-      // 服务器返回的错误响应
-      console.error("Server Error:", error.response);
-    } else if (error.request) {
-      // 请求已发出，但未收到响应
-      console.error("Network Error:", error.request);
-    } else {
-      // 发生在设置请求时的其他错误
-      console.error("Error:", error.message);
-    }
-    return Promise.reject(error);
-  }
-);
+import Api from ".";
+import { uploadFileInChunks, mergeChunks } from "../files-chunk/files-chunk";
+const CHUNK_SIZE = 20 * 1024 * 1024; // 每片大小为 5MB
 
 export const Getuser = async (data) => {
   try {
@@ -84,10 +37,74 @@ export const Uploadfiles = async (postdata, params) => {
         "Content-Type": "multipart/form-data",
       },
     });
-    console.log(postdata);
     return response;
   } catch (error) {
     throw error;
   }
 };
-export default Api;
+
+export const UploadFileschunk = async (postdata) => {
+  await uploadFileInChunks(postdata.file[0].originFileObj);
+  await mergeChunks(postdata);
+};
+
+export const Getfilelist = async () => {
+  try {
+    const response = await Api.get(`upload/filelist`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const Downloadinfo = async (id) => {
+  try {
+    const response = await Api.get(`upload/Down`, {
+      responseType: "blob", // 必须设置 responseType 为 'blob'
+      params: {
+        id: id,
+      },
+      headers: {
+        "Content-Type": "application/octet-stream",
+      },
+    });
+    const getfilename = await Api.get(`upload/Getfilesname`, {
+      params: { id },
+    });
+    console.log(response, getfilename);
+    // 创建一个 Blob 对象来保存文件数据
+    const blob = new Blob([response], {
+      type: "application/octet-stream",
+    });
+    console.log(blob);
+    // 创建一个 URL 对象
+    const downloadUrl = window.URL.createObjectURL(blob);
+
+    // 创建一个 a 标签并点击它来触发下载
+    const link = document.createElement("a");
+    link.href = downloadUrl;
+    link.download = getfilename.data.filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    return { response, getfilename };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const Downstream = async () => {
+  try {
+    const response = await Api.get(`upload/stream`);
+  } catch {}
+};
+
+export const DelFiles = (id) => {
+  console.log(id);
+  try {
+    const response = Api.delete("upload/dfiles", { params: { id: id } });
+    return response;
+  } catch {}
+};
+
+export const EditFiles = (postdata) => {};

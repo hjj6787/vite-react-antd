@@ -1,0 +1,30 @@
+.searchsan {
+    /* margin: 0 122222px; */
+}
+
+.searchsan>* {
+    margin: 0 15px;
+    /* border: 1px solid #ccc; */
+    color: #8bc0d8;
+}
+
+.actionicon {
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.actionicon::nth-child(1) {
+    border-right: 1px solid #ccc;
+}
+
+.ou {
+    background: transparent;
+}
+
+.ji {
+    background: rgba(228, 233, 232, 0.65);
+    /* background: rgba(28, 85, 109, 0.65); */
+}

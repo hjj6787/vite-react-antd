@@ -1,9 +1,9 @@
-import React from "react";
-import { Button, Checkbox, Form, Input } from "antd";
-import { Getuser, Getuserlist, Loginbody } from "../../utils/request/api";
+import React from 'react';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { Getuser, Getuserlist, Loginbody } from '../../utils/request/api';
 
 const onFinish = async (values) => {
-  console.log("Success:", values);
+  console.log('Success:', values);
   const userdata = await Getuser({
     username: values.username,
     password: values.password,
@@ -11,18 +11,18 @@ const onFinish = async (values) => {
   console.log(userdata);
 };
 const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
+  console.log('Failed:', errorInfo);
 };
 const GetuserList = async () => {
   const postData = {
-    key1: "value1",
-    key2: "value2",
+    key1: 'value1',
+    key2: 'value2',
   };
 
   // 设置 URL 参数
   const params = {
-    param1: "value1",
-    param2: "value2",
+    param1: 'value1',
+    param2: 'value2',
   };
   // const list = Getuserlist();
 
@@ -49,18 +49,16 @@ function InventoryAudit() {
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
+        autoComplete="off">
         <Form.Item
           label="Username"
           name="username"
           rules={[
             {
               required: true,
-              message: "Please input your username!",
+              message: 'Please input your username!',
             },
-          ]}
-        >
+          ]}>
           <Input />
         </Form.Item>
 
@@ -70,10 +68,9 @@ function InventoryAudit() {
           rules={[
             {
               required: true,
-              message: "Please input your password!",
+              message: 'Please input your password!',
             },
-          ]}
-        >
+          ]}>
           <Input.Password />
         </Form.Item>
 
@@ -81,8 +78,7 @@ function InventoryAudit() {
           wrapperCol={{
             offset: 8,
             span: 16,
-          }}
-        >
+          }}>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>

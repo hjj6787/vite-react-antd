@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Layout, Button } from "antd";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import MenuCon from "../component/Menu/Menu";
-import styles from "./css/layout.module.css";
+import React, { useEffect, useState } from 'react';
+import { Layout, Button } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from '@ant-design/icons';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import MenuCon from '../component/Menu/Menu';
+import styles from './css/layout.module.css';
 
 const { Header, Sider, Content } = Layout;
 // Footer,
@@ -14,39 +14,48 @@ function LayoutPage() {
   const navigate = useNavigate();
   useEffect(() => {
     // console.log(path);
-    if (path.pathname === "/main") {
-      navigate("/main/dashboard");
+    if (path.pathname === '/main') {
+      navigate('/main/dashboard');
     }
   }, []);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
   return (
-    <Layout className={styles.Layoutcot} style={{ backgroundColor: "#ffffff" }}>
-      <Header style={{ backgroundColor: "#0046a1" }}>
-        <span className={styles.HeadSpanStyle}>
-          <img
-            src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
-            alt=""
-            style={{ height: "50%" }}
-          />
-        </span>
-        <h1>Vite+React+antd5</h1>
+    <Layout className={styles.Layoutcot} style={{ backgroundColor: '#ffffff' }}>
+      <Header style={{ backgroundColor: '#0046a1' }}>
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}>
+          <span className={styles.HeadSpanStyle}>
+            <img
+              src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
+              alt=""
+              style={{ height: '50%' }}
+            />
+          </span>
+          <h1>Vite+React+antd5</h1>
+          <span className={styles.HeadSpanuesrStyle}>
+            <UserOutlined />
+          </span>
+        </div>
       </Header>
       <Layout>
         <Sider
           className={styles.sidestyle}
           collapsed={collapsed}
           onCollapse={toggleCollapsed}
-          style={{ backgroundColor: "#212323", paddingTop: "15px" }}
-        >
+          style={{ backgroundColor: '#212323', paddingTop: '15px' }}>
           <Button
             type="primary"
             onClick={toggleCollapsed}
             style={{
               marginBottom: 16,
-            }}
-          >
+            }}>
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </Button>
           <MenuCon />

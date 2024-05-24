@@ -6,9 +6,18 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./store";
 import Routerpages from "./routers";
+import { Spin } from "antd";
+import { LoadingProvider, useLoading } from "./component/Loading/Loading";
 
 function App() {
-  return <Routerpages />;
+  const { loading } = useLoading();
+  return (
+    <>
+      <Spin spinning={loading} tip="Loading...">
+        <Routerpages />
+      </Spin>
+    </>
+  );
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -20,5 +29,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

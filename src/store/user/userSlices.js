@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { produce } from "immer";
+import { createSlice } from '@reduxjs/toolkit';
+import { produce } from 'immer';
 
 export const userSclice = createSlice({
-  name: "user",
+  name: 'user',
   initialState: {
     commom: {
       route: [],

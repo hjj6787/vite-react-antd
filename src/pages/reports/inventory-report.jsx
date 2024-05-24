@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 function InventoryAudit() {
   return <h1>inventory-audit</h1>;

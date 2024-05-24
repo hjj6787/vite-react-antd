@@ -1,13 +1,13 @@
-import { defineConfig } from "vite";
-import path from "path";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import path from 'path';
+import react from '@vitejs/plugin-react';
 // import dynamicImportVars from "@rollup/plugin-dynamic-import-vars";
-import { viteMockServe } from "vite-plugin-mock";
+import { viteMockServe } from 'vite-plugin-mock';
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
   plugins: [
@@ -21,7 +21,7 @@ export default defineConfig({
     //  warnOnError:false
     // }),
     viteMockServe({
-      mockPath: "mock",
+      mockPath: 'mock',
       localEnabled: true,
     }),
   ],
