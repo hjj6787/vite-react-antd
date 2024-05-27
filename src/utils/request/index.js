@@ -20,12 +20,12 @@ Api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    setLoading(true);
+    // setLoading(true);
     return config;
   },
   (error) => {
     // 处理请求错误
-    setLoading(false);
+    // setLoading(false);
     return Promise.reject(error);
   }
 );
@@ -34,7 +34,7 @@ Api.interceptors.request.use(
 Api.interceptors.response.use(
   (response) => {
     // 对响应数据做点什么
-    setLoading(true);
+    // setLoading(true);
     return response.data;
   },
   (error) => {
@@ -49,7 +49,7 @@ Api.interceptors.response.use(
       // 发生在设置请求时的其他错误
       console.error("Error:", error.message);
     }
-    setLoading(false);
+    // setLoading(false);
     return Promise.reject(error);
   }
 );

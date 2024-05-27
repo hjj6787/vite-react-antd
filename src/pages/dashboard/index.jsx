@@ -127,7 +127,7 @@ function Dashboard() {
       setOpen(false);
     }
   };
-
+  const UploadSetup = {};
   return (
     <>
       <Card
@@ -154,7 +154,12 @@ function Dashboard() {
               上传
             </Button>
             {/* 提交文件 */}
-            <UploadForm open={open} handopen={handopen} formset={formset} />
+            <UploadForm
+              open={open}
+              handopen={handopen}
+              formset={formset}
+              setup={UploadSetup}
+            />
           </div>
         </div>
       </Card>

@@ -10,12 +10,12 @@ import { Spin } from "antd";
 import { LoadingProvider, useLoading } from "./component/Loading/Loading";
 
 function App() {
-  const { loading } = useLoading();
+  // const { loading } = useLoading();
   return (
     <>
-      <Spin spinning={loading} tip="Loading...">
+      
         <Routerpages />
-      </Spin>
+      
     </>
   );
 }

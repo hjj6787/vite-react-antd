@@ -107,4 +107,30 @@ export const DelFiles = (id) => {
   } catch {}
 };
 
-export const EditFiles = (postdata) => {};
+export const EditFiles = async (postdata) => {
+  try {
+    if (postdata.file) {
+      await uploadFileInChunks(postdata.file[0].originFileObj);
+      const pdata = JSON.parse(JSON.stringify(postdata));
+      console.log(postdata);
+      delete pdata.file;
+      const res = Api.post("upload/Editfiles", {
+        postdata: pdata,
+        id: pdata.id * 1,
+        hasfiles: true,
+      });
+      return res;
+    } else {
+      const pdata = JSON.parse(JSON.stringify(postdata));
+      console.log(postdata);
+      delete pdata.file;
+      const res = Api.post("upload/Editfiles", {
+        postdata: pdata,
+        id: pdata.id * 1,
+      });
+      return res;
+    }
+
+    return res;
+  } catch {}
+};

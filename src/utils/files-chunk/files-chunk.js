@@ -38,8 +38,9 @@ export const mergeChunks = async (postdata) => {
   const file = postdata.file[0].originFileObj;
   const filename = file.name;
   const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+  const pdata=JSON.parse(JSON.stringify(postdata))
   console.log(postdata);
-  delete postdata.file;
+  delete pdata.file;
   console.log(postdata);
 
   try {
