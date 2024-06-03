@@ -1,12 +1,15 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { produce } from 'immer';
+import { createSlice } from "@reduxjs/toolkit";
+import { produce } from "immer";
 
 export const userSclice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
     commom: {
       route: [],
     },
+    token: "",
+    ISlogin: false,
+    userdata: {},
   },
   reducers: {
     adduserrouter(state, action) {
@@ -14,9 +17,29 @@ export const userSclice = createSlice({
         draft.commom.route = [...action.payload];
       });
     },
+    loginfu(state, action) {
+      console.log(action);
+      return produce(state, (draft) => {
+        draft.token = action.payload.token;
+        draft.ISlogin = true;
+      });
+    },
+    adduserdata(state, action) {
+      return produce(state, (draft) => {
+        draft.userdata = action.payload.userdata;
+      });
+    },
+    loginoutfu(state, action) {
+      return produce(state, (draft) => {
+        draft.userdata = {};
+        draft.ISlogin = false;
+        draft.token = "";
+      });
+    },
   },
 });
 
-export const { adduserrouter } = userSclice.actions;
+export const { adduserrouter, loginfu, adduserdata, loginoutfu } =
+  userSclice.actions;
 
 export default userSclice.reducer;

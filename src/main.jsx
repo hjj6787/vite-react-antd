@@ -13,9 +13,7 @@ function App() {
   // const { loading } = useLoading();
   return (
     <>
-      
-        <Routerpages />
-      
+      <Routerpages />
     </>
   );
 }

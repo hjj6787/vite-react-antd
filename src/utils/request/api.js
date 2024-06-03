@@ -1,18 +1,49 @@
 import Api from ".";
 import { uploadFileInChunks, mergeChunks } from "../files-chunk/files-chunk";
+
 const CHUNK_SIZE = 20 * 1024 * 1024; // 每片大小为 5MB
 
-export const Getuser = async (data) => {
+export const GetLogin = async (data) => {
+  console.log(data);
   try {
     const response = await Api.post(`user/Tlogin`, data);
-    // console.log(response.data);
-    localStorage.setItem("token", response.data.token);
+    console.log(response.data);
+    // localStorage.setItem("token", response.data.token);
     return response;
   } catch (error) {
     console.error("Failed to fetch resource:", error);
     throw error;
   }
 };
+
+export const Signup = async (data) => {
+  try {
+    const response = await Api.post("user/signup", data);
+    return response;
+  } catch {}
+};
+
+export const Deluser = async (data) => {
+  console.log(data);
+  // const obj = { userid: data.postdata.userid };
+  try {
+    const response = await Api.delete("user/DeleteUser", { data });
+    return response;
+  } catch {
+    (err) => {
+      return err;
+    };
+  }
+};
+
+export const Edituser = async (data) => {
+  console.log(data);
+  try {
+    const response = await Api.post("user/updateUser", data);
+    return response;
+  } catch {}
+};
+
 export const Getuserlist = async () => {
   try {
     const response = await Api.get(`user/userlist`);
@@ -21,6 +52,7 @@ export const Getuserlist = async () => {
     throw error;
   }
 };
+
 export const Loginbody = async (postdata, params) => {
   try {
     const response = await Api.post(`user/loginbody`, postdata);
@@ -107,30 +139,54 @@ export const DelFiles = (id) => {
   } catch {}
 };
 
-export const EditFiles = async (postdata) => {
+export const EditFiles = async (postdata, id, fileName, fileSize) => {
+  console.log(postdata);
+
   try {
     if (postdata.file) {
+      const file = postdata.file[0].originFileObj;
+      const filename = file.name;
+      const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
       await uploadFileInChunks(postdata.file[0].originFileObj);
       const pdata = JSON.parse(JSON.stringify(postdata));
       console.log(postdata);
       delete pdata.file;
       const res = Api.post("upload/Editfiles", {
         postdata: pdata,
-        id: pdata.id * 1,
+        id: id * 1,
         hasfiles: true,
+        filename: filename,
+        totalChunks: totalChunks,
       });
       return res;
     } else {
       const pdata = JSON.parse(JSON.stringify(postdata));
       console.log(postdata);
+      const totalChunks = Math.ceil(fileSize / CHUNK_SIZE);
       delete pdata.file;
       const res = Api.post("upload/Editfiles", {
         postdata: pdata,
-        id: pdata.id * 1,
+        id: id * 1,
+        filename: fileName,
+        totalChunks: totalChunks,
       });
       return res;
     }
 
+    return res;
+  } catch {}
+};
+
+export const Getcele = async () => {
+  try {
+    const res = Api.get("user/celebrity");
+    return res;
+  } catch {}
+};
+
+export const GetfilesImg = async (id) => {
+  try {
+    const res = Api.get("upload/filesimg", { params: { id } });
     return res;
   } catch {}
 };

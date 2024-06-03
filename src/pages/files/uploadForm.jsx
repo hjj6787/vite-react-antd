@@ -1,47 +1,39 @@
 import React, { useState } from "react";
-import { Input, Select, Button, Modal, Form, Upload, message } from "antd";
+import {
+  Input,
+  Select,
+  Button,
+  Modal,
+  Form,
+  Upload,
+  message,
+  AutoComplete,
+} from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
 import { Uploadfiles, UploadFileschunk } from "../../utils/request/api";
-
-const selectOption = [
-  {
-    value: "jack",
-    label: "Jack",
-  },
-  {
-    value: "lucy",
-    label: "Lucy",
-  },
-  {
-    value: "tom",
-    label: "Tom",
-  },
-];
+import { useSelector } from "react-redux";
 
 const UploadForm = (prop) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [options, setOptions] = useState(selectOption);
+  const [options, setOptions] = useState([]);
   const [infos, setinfo] = useState([]);
   const [formdata, setformdata] = useState({});
-  const { open, handopen, formset } = prop;
+  const [fileList, setFileList] = React.useState([]);
+
+  const { open, handopen, formset, celeList, Diseases } = prop;
 
   useEffect(() => {
     // console.log(open);
   }, [open]);
 
+  const user = useSelector((state) => state.user.userdata.name);
+
   const handleOk = () => {
     setLoading(true);
     const allValues = form.getFieldsValue();
-    // const formdata = new FormData();
-    // for (const key in allValues) {
-    //   if (key == "file") {
-    //     formdata.append(key, allValues[key][0].originFileObj);
-    //   } else {
-    //     formdata.append(key, allValues[key]);
-    //   }
-    // }
+    allValues.Uploader = user;
 
     form
       .validateFields()
@@ -80,26 +72,24 @@ const UploadForm = (prop) => {
     (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   const props = {
-    name: "file",
-    action: "",
-    headers: {
-      authorization: "authorization-text",
-    },
-    beforeUpload: () => {
+    beforeUpload: (file) => {
+      const isZip =
+        file.type === "application/zip" || file.name.endsWith(".zip");
+      if (!isZip) {
+        message.error("只接受zip文件");
+        return Upload.LIST_IGNORE;
+      }
+      if (fileList.length > 1) {
+        message.error("You can only upload one file!");
+        return Upload.LIST_IGNORE;
+      }
+      setFileList([...fileList, file]);
       return false;
     },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-        setinfo(info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-        setinfo(() => info.fileList);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
+    onRemove: (file) => {
+      setFileList(fileList.filter((f) => f.uid !== file.uid));
     },
+    fileList,
   };
 
   const normFile = (e) => {
@@ -173,15 +163,18 @@ const UploadForm = (prop) => {
               },
             ]}
           >
-            <Select
+            {/* <Select
               showSearch
               placeholder="相关名人"
               optionFilterProp="children"
               onChange={onChange}
               onSearch={onSearch1}
               filterOption={filterOption}
-              options={selectOption}
-            />
+              options={celeList}
+            /> */}
+            <AutoComplete options={celeList} placeholder="相关名人">
+              <Input />
+            </AutoComplete>
           </Form.Item>
           <Form.Item
             label="文件相关角度"
@@ -193,15 +186,9 @@ const UploadForm = (prop) => {
               },
             ]}
           >
-            <Select
-              showSearch
-              placeholder="相关LP"
-              optionFilterProp="children"
-              onChange={onChange}
-              onSearch={onSearch1}
-              filterOption={filterOption}
-              options={options}
-            />
+            <AutoComplete options={Diseases} placeholder="相关角度">
+              <Input />
+            </AutoComplete>
           </Form.Item>
           <Form.Item
             label="文件相关LP"

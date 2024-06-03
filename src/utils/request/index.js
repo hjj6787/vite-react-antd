@@ -1,6 +1,8 @@
 // src/axios.js
 import axios from "axios";
 import { useLoading } from "../../component/Loading/Loading";
+import { store } from "../../store/index";
+const token = store.getState().user.token;
 
 // 创建 Axios 实例
 const Api = axios.create({
@@ -16,7 +18,7 @@ Api.interceptors.request.use(
   (config) => {
     // 这里可以在发送请求之前对配置做一些处理
     // 例如，添加 Authorization header
-    const token = localStorage.getItem("token"); // 假设 token 存储在 localStorage
+
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { StockOutlined, PieChartOutlined } from "@ant-design/icons";
+import {
+  StockOutlined,
+  PieChartOutlined,
+  DashboardOutlined,
+  UsergroupAddOutlined,
+} from "@ant-design/icons";
 import { Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./Menu.module.css";
+import { useSelector } from "react-redux";
 // 请求模拟数据
-const iconList = { StockOutlined, PieChartOutlined };
+const iconList = {
+  StockOutlined,
+  PieChartOutlined,
+  DashboardOutlined,
+  UsergroupAddOutlined,
+};
 function addIconToMenu(menuData) {
   for (let i = 0; i < menuData.length; i++) {
     if (menuData[i].ps_icon) {
@@ -27,40 +38,47 @@ function addIconToMenu(menuData) {
 //     }
 //   }
 // }
-function menudata() {
-  return [
+function menudata(level) {
+  const baseroute = [
     {
       key: 101,
-      label: "文件",
-      icon: <PieChartOutlined />,
+      label: "Dashboard",
+      icon: <DashboardOutlined />,
       path: "dashboard",
     },
     {
       key: 102,
-      label: "上传",
+      label: "文件",
       icon: <PieChartOutlined />,
-      path: "media",
-    },
-    {
-      key: 103,
-      label: "账号管理",
-      icon: <PieChartOutlined />,
-      path: "admin",
+      path: "files",
     },
   ];
+
+  const authroute = {
+    key: 103,
+    label: "账号管理",
+    icon: <UsergroupAddOutlined />,
+    path: "admin",
+  };
+
+  if (level == 0) {
+    baseroute.push(authroute);
+  }
+
+  return baseroute;
 }
 
 function MenuCon() {
   const Navigate = useNavigate();
-  useEffect(() => {}, []);
-  console.log();
+  const level = useSelector((state) => state.user.userdata.level);
+  const menulist = menudata(level);
   const Menuclick = (e) => {
-    const { path } = menudata().find((item) => item.key == e.key);
+    const { path } = menulist.find((item) => item.key == e.key);
     Navigate(path);
   };
   const path = useLocation();
   // console.log(path.pathname.split("/")[2]);
-  let defaultkey = menudata().find(
+  let defaultkey = menulist.find(
     (item) => item.path == path.pathname.split("/")[2]
   )?.key;
   return (
@@ -75,7 +93,7 @@ function MenuCon() {
         mode="inline"
         theme="dark"
         style={{ backgroundColor: "#212323" }}
-        items={menudata()}
+        items={menulist}
         className={styles.menu}
         onClick={(e) => Menuclick(e)}
       />
