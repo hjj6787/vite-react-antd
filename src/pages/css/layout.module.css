@@ -1,7 +1,8 @@
 .Layoutcot {
-    color: aliceblue;
+    /* color: aliceblue; */
+    color: #ffffff;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
 
 }
 
@@ -47,7 +48,9 @@
 
 .Contentp {
     color: rgb(23, 26, 29);
-    padding: 20px;
+    /* padding: 20px; */
+    margin-left: 180px;
+    padding: 45px;
 }
 
 .layoutStyle {}

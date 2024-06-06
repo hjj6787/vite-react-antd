@@ -22,7 +22,7 @@ const Dashboard = () => {
   };
   return (
     <>
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+      <Tabs items={items} type="card"></Tabs>
     </>
   );
 };

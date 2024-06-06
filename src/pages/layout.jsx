@@ -10,17 +10,21 @@ import MenuCon from "../component/Menu/Menu";
 import styles from "./css/layout.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginoutfu } from "../store/user/userSlices";
-
+import { Getfilelist, GetfilesImg } from "../utils/request/api";
+import { addfiles, addimg } from "../store/files/filesSlices";
 const { Header, Sider, Content } = Layout;
 // Footer,
 
 function LayoutPage() {
   const [collapsed, setCollapsed] = useState(false);
+  const [listdata, setlistdata] = useState([]);
   const path = useLocation();
   const navigate = useNavigate();
   const islogin = useSelector((state) => state.user.ISlogin);
   const dispatch = useDispatch();
-
+  const staticurl = import.meta.env.VITE_API_IMGURL;
+  const fileslist = useSelector((state) => state.files.fileslist);
+  const reset = useSelector((state) => state.files.reset);
   useEffect(() => {
     const loginTime = localStorage.getItem("loginTime");
     if (loginTime) {
@@ -36,6 +40,31 @@ function LayoutPage() {
     }
   }, []);
 
+  useEffect(() => {
+    (async function dayinit() {
+      const resdata = await Getfilelist();
+      setlistdata([...resdata.data].reverse());
+      dispatch(addfiles([...resdata.data].reverse()));
+    })();
+  }, [reset]);
+
+  useEffect(() => {
+    (async function fetchImgData() {
+      // console.log(fileslist);
+      const promises = fileslist.map((item) => GetfilesImg(item.id));
+      const imgdatalists = await Promise.all(promises);
+      const newImgList = fileslist.map((item, index) => ({
+        filesid: item.id,
+        imgdata: imgdatalists[index].data,
+      }));
+      newImgList.forEach((item) => {
+        item.imgpath = staticurl + item.imgpath;
+      });
+      // console.log(newImgList);
+      dispatch(addimg(newImgList));
+    })();
+  }, [fileslist]);
+
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
@@ -47,7 +76,15 @@ function LayoutPage() {
 
   return (
     <Layout className={styles.Layoutcot} style={{ backgroundColor: "#ffffff" }}>
-      <Header style={{ backgroundColor: "#0046a1" }}>
+      <Header
+        style={{
+          backgroundColor: "#0046a1",
+          position: "sticky",
+          top: 0,
+          width: "100%",
+          zIndex: "100",
+        }}
+      >
         <div
           style={{
             width: "100%",
@@ -77,12 +114,19 @@ function LayoutPage() {
           </Popconfirm>
         </div>
       </Header>
-      <Layout>
+      <Layout style={{}}>
         <Sider
           className={styles.sidestyle}
           collapsed={collapsed}
           onCollapse={toggleCollapsed}
-          style={{ backgroundColor: "#212323", paddingTop: "15px" }}
+          style={{
+            backgroundColor: "#212323",
+            paddingTop: "15px",
+            position: "fixed",
+            height: "100vh",
+            left: 0,
+            top: "64px",
+          }}
         >
           <Button
             type="primary"

@@ -16,28 +16,18 @@ import {
   EditFiles,
 } from "../../utils/request/api";
 
-const selectOption = [
-  {
-    value: "jack",
-    label: "Jack",
-  },
-  {
-    value: "lucy",
-    label: "Lucy",
-  },
-  {
-    value: "tom",
-    label: "Tom",
-  },
-];
-
 const UpdateForm = (prop) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [options, setOptions] = useState(selectOption);
   const [fileList, setFileList] = React.useState([]);
-  const [formdata, setformdata] = useState({});
   const { open, handopen, formset, Eformdata, celeList, Diseases } = prop;
+  form.setFieldsValue({
+    filesname: Eformdata.fileAName,
+    personname: Eformdata.relatedPerson,
+    jiaoduname: Eformdata.relatedAngle,
+    LPname: Eformdata.relatedLP,
+    filesmessage: Eformdata.fileDescription,
+  });
 
   const handleOk = () => {
     setLoading(true);
@@ -120,11 +110,6 @@ const UpdateForm = (prop) => {
       .catch(() => {});
   };
 
-  const onFinish = (values) => {
-    console.log("Form values:", values);
-    setformdata(values);
-  };
-
   const onSearch1 = (value) => {};
 
   return (
@@ -152,7 +137,6 @@ const UpdateForm = (prop) => {
           }}
           form={form}
           onValuesChange={onFieldsChange}
-          onFinish={onFinish}
         >
           <Form.Item
             label="文件名"

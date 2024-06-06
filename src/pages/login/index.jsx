@@ -12,7 +12,7 @@ function Login() {
   const onFinish = (values) => {
     console.log("Success:", values);
     GetLogin({ ...values }).then((e) => {
-      console.log(e);
+      // console.log(e);
       if (e.data.code === 200) {
         message.success("登录成功");
         dispath(loginfu({ token: e.data.data.token }));

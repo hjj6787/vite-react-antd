@@ -18,8 +18,15 @@ const ImgForm = (props) => {
   const [imgPathList, setimgPathList] = useState([]);
   const staticurl = import.meta.env.VITE_API_IMGURL;
   useEffect(() => {
-    console.log(imglist);
-    const temp = imglist.map((e) => {
+    // console.log(imglist);
+
+    const imageList = imglist.filter((e) => {
+      // 检查文件名是否包含图片扩展名
+      const imageExtensions = ["jpg", "jpeg", "png", "webp"];
+      const fileExtension = e.filesname.toLowerCase().split(".").pop();
+      return imageExtensions.includes(fileExtension);
+    });
+    const temp = imageList.map((e) => {
       return {
         ...e, // 展开原来的对象
         imgpath: staticurl + e.imgpath, // 修改 imgpath 属性

@@ -7,10 +7,10 @@ export default function AuthRoute(props) {
   const isLogin = localStorage.getItem("token");
   const currentPath = location.pathname;
   const islogin = useSelector((state) => state.user.ISlogin);
+  const lastLogintime = useSelector((state) => state.user);
   const level = useSelector((state) => state.user.userdata.level);
   const condition = currentPath === "/login" && !Islogin;
   const adminfiles = currentPath === "/main/admin" && level != "0";
-
   if (condition) {
     return props.children;
   }

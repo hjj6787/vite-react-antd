@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Card, Table, Tag, Button, AutoComplete, Input, Modal } from "antd";
 import {
   DownloadOutlined,
@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import style from "./index.module.css";
 import UploadForm from "./uploadForm";
-import UpdateForm from "./UpdateForm";
+import UpdateForm from "./updateForm";
 import ImgForm from "./imgForm";
 import {
   Getfilelist,
@@ -19,7 +19,8 @@ import {
   Getcele,
   GetfilesImg,
 } from "../../utils/request/api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetaction } from "../../store/files/filesSlices";
 import moment from "moment";
 
 const { Column, ColumnGroup } = Table;
@@ -48,17 +49,27 @@ function Dashboard() {
   const [modal, contextHolder] = Modal.useModal();
 
   const userRdata = useSelector((state) => state.user.userdata);
-
+  const Reset = useSelector((state) => state.files.reset);
+  const fileslist = useSelector((state) => state.files.fileslist);
+  const dispatch = useDispatch();
   useEffect(() => {
-    Getfilelist().then((res) => {
-      let listdata = res.data;
-      console.log(listdata);
-      listdata.forEach((e) => {
-        e.key = e.id;
-      });
-      setfilelist([...listdata].reverse());
-      setChosenfilelist([...listdata].reverse());
-    });
+    // Getfilelist().then((res) => {
+    //   let listdata = res.data;
+    //   // console.log(listdata);
+    //   listdata.forEach((e) => {
+    //     e.key = e.id;
+    //   });
+    //   setfilelist([...listdata].reverse());
+    //   setChosenfilelist([...listdata].reverse());
+    // });
+    const fileslistcopy = fileslist.map((file) => ({
+      ...file,
+      key: file.id,
+    }));
+
+    // console.log("files:", fileslist);
+    setfilelist(fileslistcopy);
+    setChosenfilelist(fileslist);
     Getcele().then((res) => {
       // console.log(res);
       const celearr = res.data.data;
@@ -81,19 +92,18 @@ function Dashboard() {
       setceleList(selectOption);
       setDiseases(Diseasesoption);
     });
-  }, [reset]);
+  }, [reset, Reset]);
 
   const clickbb = (e) => {
     setsubmitisok(true);
-    console.log(e);
+    // console.log(e);
     Downloadinfo(e).then((res) => {
       setreset((e) => !e);
-      console.log(res);
+      // console.log(res);
     });
   };
 
   const editf = (e) => {
-    console.log(e);
     setEOpen(true);
     setEformdata(e);
   };
@@ -113,7 +123,7 @@ function Dashboard() {
     const delff = () => {
       DelFiles(e).then((res) => {
         setreset((e) => !e);
-        console.log(res);
+        // console.log(res);
       });
     };
     modal.confirm({
@@ -136,14 +146,15 @@ function Dashboard() {
 
   const formset = () => {
     setreset((e) => !e);
+    dispatch(resetaction());
   };
 
   const onSearchfilename = (e) => {
-    console.log(e);
+    // console.log(e);
   };
 
   const celeListSelect = (e) => {
-    console.log(e);
+    // console.log(e);
     setFilter((prevFilters) => ({
       ...prevFilters,
       relatedPerson: e,
@@ -151,7 +162,7 @@ function Dashboard() {
   };
 
   const DiseasesSelect = (e) => {
-    console.log(e);
+    // console.log(e);
     setFilter((prevFilters) => ({
       ...prevFilters,
       relatedAngle: e,
@@ -167,7 +178,7 @@ function Dashboard() {
 
   const filteredList = useMemo(() => {
     if (Object.values(filter).some((value) => value.trim() !== "")) {
-      console.log(filter, filelist);
+      // console.log(filter, filelist);
       const filterdata = filelist.filter((item) => {
         // 检查filter的每个键
         return Object.keys(filter).some((key) => {
@@ -176,7 +187,7 @@ function Dashboard() {
           return item[key].toLowerCase().includes(filter[key].toLowerCase());
         });
       });
-      console.log(filterdata);
+      // console.log(filterdata);
       return filterdata;
     }
     return filelist;
@@ -184,7 +195,7 @@ function Dashboard() {
 
   const filterOption = (input, option) => {
     // (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-    console.log(input);
+    // console.log(input);
     const label = option?.label ?? "";
     return (
       label.toLowerCase().includes(input.toLowerCase()) || input.length > 0
@@ -192,7 +203,7 @@ function Dashboard() {
   };
 
   const onChange = (value) => {
-    console.log(`selected ${value}`);
+    // console.log(`selected ${value}`);
   };
 
   const showModal = () => {
@@ -219,7 +230,6 @@ function Dashboard() {
     }
   };
 
-  const UploadSetup = {};
   return (
     <>
       <Card
@@ -250,7 +260,6 @@ function Dashboard() {
               open={open}
               handopen={handopen}
               formset={formset}
-              setup={UploadSetup}
               celeList={celeList}
               Diseases={Diseases}
             />

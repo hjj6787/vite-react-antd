@@ -4,9 +4,7 @@ import { produce } from "immer";
 export const userSclice = createSlice({
   name: "user",
   initialState: {
-    commom: {
-      route: [],
-    },
+    commom: {},
     token: "",
     ISlogin: false,
     userdata: {},
@@ -34,6 +32,7 @@ export const userSclice = createSlice({
         draft.userdata = {};
         draft.ISlogin = false;
         draft.token = "";
+        loginitTime = "";
       });
     },
   },

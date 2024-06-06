@@ -26,7 +26,8 @@
     "redux-persist": "^6.0.0",
     "rollup-plugin-visualizer": "^5.12.0",
     "vite-plugin-mock": "^3.0.1",
-    "vite-plugin-style-import": "^2.0.0"
+    "vite-plugin-style-import": "^2.0.0",
+    "wc-waterfall": "^0.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
