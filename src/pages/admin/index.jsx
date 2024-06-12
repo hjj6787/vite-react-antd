@@ -112,8 +112,10 @@ function Admin() {
           key="level"
           render={(_, record) => {
             if (record.level == "0") {
-              return <Tag color="#58c622">管理员</Tag>;
+              return <Tag color="#d83333">超级管理员</Tag>;
             } else if (record.level == "1") {
+              return <Tag color="#58c622">管理员</Tag>;
+            } else {
               return <Tag>普通用户</Tag>;
             }
           }}

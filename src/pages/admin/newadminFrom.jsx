@@ -51,8 +51,9 @@ const NewAdmin = (props) => {
     handopen("close");
   };
   const option = [
-    { value: "0", label: "管理员" },
-    { value: "1", label: "普通用户" },
+    { value: "0", label: "超级管理员" },
+    { value: "1", label: "管理员" },
+    { value: "2", label: "普通用户" },
   ];
   return (
     <>
@@ -121,7 +122,7 @@ const NewAdmin = (props) => {
             rules={[
               {
                 required: true,
-                message: "请输入用户名",
+                message: "选择权限",
               },
             ]}
           >

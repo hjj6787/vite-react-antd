@@ -32,7 +32,6 @@ export const userSclice = createSlice({
         draft.userdata = {};
         draft.ISlogin = false;
         draft.token = "";
-        loginitTime = "";
       });
     },
   },

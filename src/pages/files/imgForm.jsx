@@ -42,7 +42,13 @@ const ImgForm = (props) => {
 
   return (
     <>
-      <Modal open={open} onCancel={handleCancel} footer={[]} width={1000}>
+      <Modal
+        open={open}
+        onCancel={handleCancel}
+        footer={[]}
+        width={1000}
+        forceRender
+      >
         <div
           style={{
             display: "flex",

@@ -12,7 +12,7 @@ import { Image, Space } from "antd";
 const Imgmodel = (props) => {
   // or you can download flipped and rotated image
   // https://codesandbox.io/s/zi-ding-yi-gong-ju-lan-antd-5-7-0-forked-c9jvmp
-  const { src, height, name } = props;
+  const { src, width, name, key } = props;
   const onDownload = () => {
     fetch(src)
       .then((response) => response.blob())
@@ -29,9 +29,10 @@ const Imgmodel = (props) => {
   };
   return (
     <Image
-      height={height}
+      width={width}
       style={{ margin: "0 15px" }}
       src={src}
+      key={key}
       preview={{
         toolbarRender: (
           _,

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import style from "./dayup.module.css";
 import Imgmodel from "./imgmodel";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "antd";
+import { Button, Card, Pagination } from "antd";
 import { VerticalAlignBottomOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { Downloadinfo } from "../../../utils/request/api";
@@ -49,45 +49,45 @@ const Dayup = (props) => {
   //   });
   // }, [imgPathList]);
   useEffect(() => {
-    const temparr = imgPathList.slice((imglistindex - 1) * 3, imglistindex * 3);
+    const temparr = imgPathList.slice((imglistindex - 1) * 2, imglistindex * 2);
     setimgAarr(temparr);
   }, [imglistindex, imgPathList, imglistR]);
 
   const clickdowninfo = (e) => {
     Downloadinfo(e);
   };
-
+  const showTotal = (total) => `Total ${total} items`;
+  const indexchange = (e) => {
+    console.log(e);
+    setimglistindex(e);
+  };
   return (
     <>
+      <Card>
+        <Pagination
+          size="small"
+          total={imgPathList.length}
+          showTotal={showTotal}
+          showQuickJumper
+          pageSize={2}
+          onChange={(e) => indexchange(e)}
+        />
+      </Card>
       <div className={style.conflex}>
         {imgAarr.map((e, i) => (
           <div key={`${i}-789`} className={style.conflexItem}>
             <div className={style.useritem}>
-              <div style={{ display: "flex" }}>
-                <div className={style.namehead}>
-                  {filesdata.filter((E) => E.id == e.filesid)[0].Uploader[0]}
-                </div>
-                <span className={style.username}>
-                  {filesdata.filter((E) => E.id == e.filesid)[0].Uploader}
-                </span>
-              </div>
-              <div style={{ float: "right" }}>
-                <span
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: "bolder",
-                    marginRight: "20px",
-                  }}
-                >
-                  下载完整文件
-                </span>
-                <Button
-                  type="primary"
-                  shape="circle"
-                  onClick={() => clickdowninfo(e.filesid)}
-                  icon={<VerticalAlignBottomOutlined />}
-                />
-              </div>
+              <span className={style.username}>
+                上传人：
+                {filesdata.filter((E) => E.id == e.filesid)[0].Uploader}
+              </span>
+
+              <Button
+                type="primary"
+                shape="circle"
+                onClick={() => clickdowninfo(e.filesid)}
+                icon={<VerticalAlignBottomOutlined />}
+              />
             </div>
             <div className={style.usertext}>
               角度：{filesdata.filter((E) => E.id == e.filesid)[0].relatedAngle}
@@ -95,7 +95,8 @@ const Dayup = (props) => {
               {moment(
                 filesdata.filter((E) => E.id == e.filesid)[0].uploadTime
               ).format("YYYY-MM-DD")}
-              &nbsp; 人物名：
+              &nbsp; <br />
+              人物名：
               {filesdata.filter((E) => E.id == e.filesid)[0].relatedPerson
                 ? filesdata.filter((E) => E.id == e.filesid)[0].relatedPerson
                 : "无"}
@@ -111,7 +112,7 @@ const Dayup = (props) => {
                 return (
                   <div key={`${i}-${index}`} className={style.imgitem}>
                     <Imgmodel
-                      height={100}
+                      width={100}
                       src={item.imgpath}
                       name={item.filesname}
                     />

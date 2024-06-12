@@ -10,6 +10,7 @@ const Admin = React.lazy(() => import("../pages/admin"));
 const Pages404 = React.lazy(() => import("../pages/404page"));
 const Media = React.lazy(() => import("../pages/media"));
 const Files = React.lazy(() => import("../pages/files"));
+const Gateway = React.lazy(() => import("../pages/Gateway"));
 
 const routes = [
   { path: "/", element: <Navigate to="/main" />, auth: false, name: "/" },
@@ -53,7 +54,7 @@ const routes = [
         path: "admin",
         element: <Admin />,
         auth: false,
-        name: "dashboard",
+        name: "admin",
         icon: "PieChartOutlined",
         children: [],
       },
@@ -62,6 +63,14 @@ const routes = [
         element: <Media />,
         auth: false,
         name: "dashboard",
+        icon: "PieChartOutlined",
+        children: [],
+      },
+      {
+        path: "Gateway",
+        element: <Gateway />,
+        auth: false,
+        name: "Gateway",
         icon: "PieChartOutlined",
         children: [],
       },

@@ -11,7 +11,7 @@ export const uploadFileInChunks = async (file) => {
     const start = chunkIndex * CHUNK_SIZE;
     const end = Math.min(start + CHUNK_SIZE, file.size);
     const chunk = file.slice(start, end);
-    console.log(chunk);
+    // console.log(chunk);
     const formData = new FormData();
     formData.append("file", chunk);
     formData.append("fileName", file.name);
@@ -25,10 +25,10 @@ export const uploadFileInChunks = async (file) => {
       })
     );
   }
-  console.log(uploadPromises.length);
+  // console.log(uploadPromises.length);
   try {
     await Promise.all(uploadPromises);
-    console.log("All chunks uploaded successfully");
+    // console.log("All chunks uploaded successfully");
   } catch (error) {
     console.error("Error uploading chunks", error);
   }
@@ -38,10 +38,10 @@ export const mergeChunks = async (postdata) => {
   const file = postdata.file[0].originFileObj;
   const filename = file.name;
   const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
-  const pdata=JSON.parse(JSON.stringify(postdata))
-  console.log(postdata);
+  const pdata = JSON.parse(JSON.stringify(postdata));
+  // console.log(postdata);
   delete pdata.file;
-  console.log(postdata);
+  // console.log(postdata);
 
   try {
     const response = await Api.post("upload/merge-chunks", {

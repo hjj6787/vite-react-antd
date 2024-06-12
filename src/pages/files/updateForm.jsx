@@ -19,16 +19,19 @@ import {
 const UpdateForm = (prop) => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [fileList, setFileList] = React.useState([]);
+  const [fileList, setFileList] = useState([]);
   const { open, handopen, formset, Eformdata, celeList, Diseases } = prop;
-  form.setFieldsValue({
-    filesname: Eformdata.fileAName,
-    personname: Eformdata.relatedPerson,
-    jiaoduname: Eformdata.relatedAngle,
-    LPname: Eformdata.relatedLP,
-    filesmessage: Eformdata.fileDescription,
-  });
-
+  useEffect(() => {
+    if (Eformdata) {
+      form.setFieldsValue({
+        filesname: Eformdata.fileAName,
+        personname: Eformdata.relatedPerson,
+        jiaoduname: Eformdata.relatedAngle,
+        LPname: Eformdata.relatedLP,
+        filesmessage: Eformdata.fileDescription,
+      });
+    }
+  }, [Eformdata, form]);
   const handleOk = () => {
     setLoading(true);
     const allValues = form.getFieldsValue();
@@ -66,13 +69,6 @@ const UpdateForm = (prop) => {
     form.resetFields();
     handopen("close");
   };
-
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
-
-  const filterOption = (input, option) =>
-    (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
   const props = {
     beforeUpload: (file) => {
@@ -120,6 +116,7 @@ const UpdateForm = (prop) => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[]}
+        forceRender
       >
         <Form
           name="filesedit"

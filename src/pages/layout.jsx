@@ -42,7 +42,9 @@ function LayoutPage() {
 
   useEffect(() => {
     (async function dayinit() {
+      console.log(111);
       const resdata = await Getfilelist();
+      console.log(resdata);
       setlistdata([...resdata.data].reverse());
       dispatch(addfiles([...resdata.data].reverse()));
     })();
@@ -139,7 +141,9 @@ function LayoutPage() {
           </Button>
           <MenuCon />
         </Sider>
-        <Content className={styles.Contentp}>
+        <Content
+          className={!collapsed ? styles.Contentp : styles.Contentpclose}
+        >
           <Outlet />
         </Content>
       </Layout>

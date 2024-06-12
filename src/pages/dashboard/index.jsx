@@ -9,11 +9,11 @@ const items = [
     label: "每日素材",
     children: <NewUpload />,
   },
-  {
-    key: "2",
-    label: "素材统计",
-    children: <MaterialStatistics />,
-  },
+  // {
+  //   key: "2",
+  //   label: "素材统计",
+  //   children: <MaterialStatistics />,
+  // },
 ];
 
 const Dashboard = () => {

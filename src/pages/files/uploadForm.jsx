@@ -108,7 +108,7 @@ const UploadForm = (prop) => {
   };
 
   const onFinish = (values) => {
-    console.log("Form values:", values);
+    // console.log("Form values:", values);
     setformdata(values);
   };
 
@@ -122,6 +122,7 @@ const UploadForm = (prop) => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[]}
+        forceRender
       >
         <Form
           name="filessub"

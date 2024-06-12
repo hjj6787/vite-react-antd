@@ -35,11 +35,9 @@ function Dashboard() {
   const [Eselectid, setEselectid] = useState("");
   const [submitisok, setsubmitisok] = useState(false);
   const [filelist, setfilelist] = useState([]);
-  const [Chosenfilelist, setChosenfilelist] = useState([]);
   const [celeList, setceleList] = useState([]);
   const [Diseases, setDiseases] = useState([]);
   const [imglist, setimglist] = useState([]);
-  const [reset, setreset] = useState(true);
   const [filter, setFilter] = useState({
     fileAName: "",
     relatedPerson: "",
@@ -53,23 +51,13 @@ function Dashboard() {
   const fileslist = useSelector((state) => state.files.fileslist);
   const dispatch = useDispatch();
   useEffect(() => {
-    // Getfilelist().then((res) => {
-    //   let listdata = res.data;
-    //   // console.log(listdata);
-    //   listdata.forEach((e) => {
-    //     e.key = e.id;
-    //   });
-    //   setfilelist([...listdata].reverse());
-    //   setChosenfilelist([...listdata].reverse());
-    // });
+    console.log("fileschange");
     const fileslistcopy = fileslist.map((file) => ({
       ...file,
       key: file.id,
     }));
-
-    // console.log("files:", fileslist);
+    console.log(fileslistcopy);
     setfilelist(fileslistcopy);
-    setChosenfilelist(fileslist);
     Getcele().then((res) => {
       // console.log(res);
       const celearr = res.data.data;
@@ -92,7 +80,7 @@ function Dashboard() {
       setceleList(selectOption);
       setDiseases(Diseasesoption);
     });
-  }, [reset, Reset]);
+  }, [fileslist]);
 
   const clickbb = (e) => {
     setsubmitisok(true);
@@ -104,13 +92,23 @@ function Dashboard() {
   };
 
   const editf = (e) => {
+    if (userRdata.level != "0" && userRdata.level != "1") {
+      modal.confirm({
+        title: "提示",
+        icon: <ExclamationCircleOutlined />,
+        content: "非管理员不能修改",
+        okText: "确认",
+        cancelText: "取消",
+      });
+      return;
+    }
     setEOpen(true);
     setEformdata(e);
   };
 
   const delfiles = (e) => {
-    console.log(userRdata.lever);
-    if (userRdata.lever != "0") {
+    console.log(userRdata);
+    if (userRdata.level != "0" && userRdata.level != "1") {
       modal.confirm({
         title: "提示",
         icon: <ExclamationCircleOutlined />,
@@ -122,8 +120,9 @@ function Dashboard() {
     }
     const delff = () => {
       DelFiles(e).then((res) => {
-        setreset((e) => !e);
+        // setreset((e) => !e);
         // console.log(res);
+        formset();
       });
     };
     modal.confirm({
@@ -145,7 +144,6 @@ function Dashboard() {
   };
 
   const formset = () => {
-    setreset((e) => !e);
     dispatch(resetaction());
   };
 

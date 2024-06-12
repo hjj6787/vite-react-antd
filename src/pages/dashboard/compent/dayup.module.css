@@ -1,15 +1,25 @@
 .conflex {
     display: flex;
     /* justify-content: flex-start; */
-    flex-direction: column;
-    /* flex-wrap: wrap; */
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.fixbutton {
+    position: fixed;
+    top: 300px;
+    right: 10px;
+    width: 200px;
+    height: 50px;
+    /* background-color: #5bb5d8; */
 }
 
 .conflexItem {
     /* flex: 1; */
     margin: 10px;
     /* width: 80%; */
-    max-width: 600px;
+    max-width: 500px;
     border-bottom: 2px dotted #363635;
     padding: 20px 0;
 }
@@ -23,9 +33,9 @@
 .namehead {
     /* background-color: #a3a3a3; */
     border: 2px solid #a3a3a3;
-    width: 40px;
-    height: 40px;
-    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    line-height: 20px;
     text-align: center;
     border-radius: 100%;
     margin-right: 20px;
@@ -36,7 +46,7 @@
 .username {
     line-height: 30px;
     text-align: center;
-    font-size: 25px;
+    font-size: 17px;
     font-weight: bolder;
 }
 

@@ -4,6 +4,7 @@ import {
   PieChartOutlined,
   DashboardOutlined,
   UsergroupAddOutlined,
+  GatewayOutlined,
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -54,15 +55,23 @@ function menudata(level) {
     },
   ];
 
-  const authroute = {
-    key: 103,
-    label: "账号管理",
-    icon: <UsergroupAddOutlined />,
-    path: "admin",
-  };
+  const authroute = [
+    {
+      key: 103,
+      label: "账号管理",
+      icon: <UsergroupAddOutlined />,
+      path: "admin",
+    },
+    {
+      key: 104,
+      label: "网关",
+      icon: <GatewayOutlined />,
+      path: "Gateway",
+    },
+  ];
 
   if (level == 0) {
-    baseroute.push(authroute);
+    baseroute.push(...authroute);
   }
 
   return baseroute;

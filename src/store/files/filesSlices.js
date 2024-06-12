@@ -11,6 +11,7 @@ const filesSlices = createSlice({
   reducers: {
     addfiles(state, action) {
       return produce(state, (draft) => {
+        console.log("addfiles");
         draft.fileslist = [...action.payload];
       });
     },
@@ -21,6 +22,7 @@ const filesSlices = createSlice({
     },
     resetaction(state, action) {
       return produce(state, (draf) => {
+        console.log("resetaction");
         draf.reset = !draf.reset;
       });
     },
