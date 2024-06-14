@@ -51,12 +51,12 @@ function Dashboard() {
   const fileslist = useSelector((state) => state.files.fileslist);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("fileschange");
+    // console.log("fileschange");
     const fileslistcopy = fileslist.map((file) => ({
       ...file,
       key: file.id,
     }));
-    console.log(fileslistcopy);
+    // console.log(fileslistcopy);
     setfilelist(fileslistcopy);
     Getcele().then((res) => {
       // console.log(res);

@@ -69,8 +69,7 @@ function menudata(level) {
       path: "Gateway",
     },
   ];
-
-  if (level == 0) {
+  if (level == "0") {
     baseroute.push(...authroute);
   }
 
@@ -80,13 +79,13 @@ function menudata(level) {
 function MenuCon() {
   const Navigate = useNavigate();
   const level = useSelector((state) => state.user.userdata.level);
+  // const [menulist, setmenulist] = useState([]);
   const menulist = menudata(level);
   const Menuclick = (e) => {
     const { path } = menulist.find((item) => item.key == e.key);
     Navigate(path);
   };
   const path = useLocation();
-  // console.log(path.pathname.split("/")[2]);
   let defaultkey = menulist.find(
     (item) => item.path == path.pathname.split("/")[2]
   )?.key;

@@ -38,7 +38,7 @@ const Dayup = (props) => {
     });
 
     setimgPathList(temp);
-    console.log(imglistR);
+    // console.log(imglistR);
   }, [imglistR]);
 
   // useEffect(() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Checkbox, Form, Input, Card, message } from "antd";
 import style from "./login.module.css";
-import { GetLogin } from "../../utils/request/api";
+import { GetLogin, Verifyip } from "../../utils/request/api";
 import { loginfu, adduserdata } from "../../store/user/userSlices";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,17 @@ function Login() {
   const navgate = useNavigate();
   const onFinish = (values) => {
     console.log("Success:", values);
+
+    Verifyip().then((e) => {
+      console.log(e);
+      if (e.data.code == 500) {
+        navgate("/Unable");
+        return;
+      }
+    });
+
     GetLogin({ ...values }).then((e) => {
-      // console.log(e);
+      console.log(e);
       if (e.data.code === 200) {
         message.success("登录成功");
         dispath(loginfu({ token: e.data.data.token }));

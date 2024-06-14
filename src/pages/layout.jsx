@@ -42,9 +42,9 @@ function LayoutPage() {
 
   useEffect(() => {
     (async function dayinit() {
-      console.log(111);
+      // console.log(111);
       const resdata = await Getfilelist();
-      console.log(resdata);
+      // console.log(resdata);
       setlistdata([...resdata.data].reverse());
       dispatch(addfiles([...resdata.data].reverse()));
     })();

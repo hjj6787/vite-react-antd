@@ -17,14 +17,14 @@
 }
 
 .actionicon::nth-child(1) {
-    border-right: 1px solid #cccccc;
+    border-right: 1px solid #ccc;
 }
 
-.no {
+.ou {
     background: transparent;
 }
 
-.black {
-    background: rgba(206, 49, 49, 0.65);
+.ji {
+    background: rgba(228, 233, 232, 0.65);
     /* background: rgba(28, 85, 109, 0.65); */
 }

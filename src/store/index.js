@@ -12,10 +12,12 @@ import {
 import storage from "redux-persist/lib/storage";
 import userSlices from "./user/userSlices";
 import filesSlices from "./files/filesSlices";
+import gatewaySlices from "./gateway/gatewaySlices";
 
 const rootReducer = combineReducers({
   user: userSlices,
   files: filesSlices,
+  gateway: gatewaySlices,
   // 其他 reducers...
 });
 const persistConfig = {

@@ -8,6 +8,7 @@ const Dashboard = React.lazy(() => import("../pages/dashboard"));
 
 const Admin = React.lazy(() => import("../pages/admin"));
 const Pages404 = React.lazy(() => import("../pages/404page"));
+const Unable = React.lazy(() => import("../pages/404page/Unable"));
 const Media = React.lazy(() => import("../pages/media"));
 const Files = React.lazy(() => import("../pages/files"));
 const Gateway = React.lazy(() => import("../pages/Gateway"));
@@ -27,7 +28,7 @@ const routes = [
     children: [
       {
         path: "",
-        element: <Navigate to="files" />,
+        element: <Navigate to="dashboard" />,
         auth: false,
         name: "default",
         icon: "PieChartOutlined",
@@ -82,6 +83,12 @@ const routes = [
     auth: false,
     name: "login",
     icon: "DesktopOutlined",
+  },
+  {
+    path: "/Unable",
+    element: <Unable />,
+    auth: false,
+    name: "Unable",
   },
   { path: "*", element: <Pages404 />, auth: false, name: "404" },
 ];

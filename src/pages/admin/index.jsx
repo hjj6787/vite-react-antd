@@ -22,7 +22,6 @@ function Admin() {
   const [choseuser, setchoseuser] = useState({});
   useEffect(() => {
     Getuserlist().then((e) => {
-      console.log(e);
       setuserlist(() => {
         const newarr = [...e.data.udata];
         newarr.forEach((e) => (e.key = e.userid));

@@ -190,3 +190,24 @@ export const GetfilesImg = async (id) => {
     return res;
   } catch {}
 };
+
+export const Getiplist = async (id) => {
+  try {
+    const res = Api.get("gateway/Alliplist");
+    return res;
+  } catch {}
+};
+
+export const Editiplist = async (data) => {
+  try {
+    const res = Api.post("gateway/eidtlist", data);
+    return res;
+  } catch {}
+};
+
+export const Verifyip = async () => {
+  try {
+    const res = Api.get("gateway/verifyip");
+    return res;
+  } catch {}
+};
